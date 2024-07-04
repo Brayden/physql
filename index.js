@@ -31,7 +31,7 @@ async function generateScreenshot() {
             return;
         }
 
-        console.log('Updating the display...')
+        console.log('Updated the display...')
     });
 }
 

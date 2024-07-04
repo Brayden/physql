@@ -26,7 +26,15 @@
                 height: 100%;
             }
 
+            #chart-container img {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
             #qr-code {
+                opacity: 0;
                 position: absolute;
                 top: 50%;
                 left: 50%;
@@ -43,7 +51,9 @@
                 <!-- chartID=54e7f9f3-bbf2-4afc-b8ab-9fcc31cecdb0 -->
                 <!-- sourceID=c0ddc16c-377c-4aaa-9cf8-ac8aa86ad19f -->
                 <!-- baseID=8e63ca41-6172-479c-8da4-663e2df63e33 -->
-                <!-- <iframe src="https://app.outerbase.com/embed/chart?apiKey=5ef6148e-e1c4-426e-94d3-b5292554ae72&chartID=54e7f9f3-bbf2-4afc-b8ab-9fcc31cecdb0&sourceID=c0ddc16c-377c-4aaa-9cf8-ac8aa86ad19f&baseID=8e63ca41-6172-479c-8da4-663e2df63e33&height=370" width="100%" height="370" frameBorder="0"></iframe> -->
+
+                <!-- Render `./sample-chart.svg -->
+                <img src="./sample-chart.svg" alt="sample-chart" />
             </div>
 
             <div id="qr-code">

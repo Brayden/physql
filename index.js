@@ -4,7 +4,10 @@ const fs = require('fs');
 async function generateScreenshot() {
     // const browser = await puppeteer.launch();
     // const browser = await puppeteer.launch({ executablePath: "chromium-browser" });
-    const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disabled-setupid-sandbox'] });
+    // const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disabled-setupid-sandbox', '--disable-extensions'] });
+    const browser = await puppeteer.launch({
+        executablePath: '/usr/bin/chromium-browser',
+    });
     const page = await browser.newPage();
     await page.goto(`file://${__dirname}/src/index.html`);
     await page.setViewport({ width: 800, height: 480 });

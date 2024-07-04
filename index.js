@@ -35,7 +35,7 @@ async function generateScreenshot() {
     });
 }
 
-// generateScreenshot();
+generateScreenshot();
 
 // Call `generateScreenshot()` every 60 seconds
 setInterval(generateScreenshot, 60000);

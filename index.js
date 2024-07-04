@@ -1,12 +1,20 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 
+var index = 0;
+
 async function generateScreenshot() {
+    if (index === 2) {
+        index = 0;
+    } else {
+        index++;
+    }
+
     const browser = await puppeteer.launch({
         executablePath: '/usr/bin/chromium-browser',
     });
     const page = await browser.newPage();
-    await page.goto(`file://${__dirname}/src/index.html`);
+    await page.goto(`file://${__dirname}/src/index.html?index=${index}`);
     await page.setViewport({ width: 800, height: 480 });
 
     const screenshotPath = 'page.png';
@@ -22,9 +30,12 @@ async function generateScreenshot() {
             console.error(`exec error: ${error}`);
             return;
         }
-        console.log(`stdout: ${stdout}`);
-        console.error(`stderr: ${stderr}`);
+
+        console.log('Updating the display...')
     });
 }
 
-generateScreenshot();
+// generateScreenshot();
+
+// Call `generateScreenshot()` every 60 seconds
+setInterval(generateScreenshot, 60000);

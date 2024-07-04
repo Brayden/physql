@@ -53,7 +53,7 @@
                 <!-- baseID=8e63ca41-6172-479c-8da4-663e2df63e33 -->
 
                 <!-- Render `./sample-chart.svg -->
-                <img src="./sample-chart.svg" alt="sample-chart" />
+                <img id="chart-image" alt="sample-chart" />
             </div>
 
             <div id="qr-code">
@@ -63,6 +63,13 @@
     </body>
 
     <script type="text/javascript">
+        // Get query param `index`
+        const urlParams = new URLSearchParams(window.location.search);
+        const index = urlParams.get("index");
+
+        // Update the `#chart-image` src based on index like `sample-chart-${index}.svg`
+        document.getElementById("chart-image").src = `./sample-chart${index}.svg`;
+
         const qrCode = new QRCodeStyling({
             width: 150,
             height: 150,

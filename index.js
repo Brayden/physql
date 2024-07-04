@@ -3,9 +3,10 @@ const fs = require('fs');
 
 async function generateScreenshot() {
     // const browser = await puppeteer.launch();
-    const browser = await puppeteer.launch({ executablePath: "chromium-browser" });
+    // const browser = await puppeteer.launch({ executablePath: "chromium-browser" });
+    const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disabled-setupid-sandbox'] });
     const page = await browser.newPage();
-    await page.goto(`./src/index.html`);
+    await page.goto(`file://${__dirname}/src/index.html`);
     await page.setViewport({ width: 800, height: 480 });
 
     const screenshotPath = 'page.png';

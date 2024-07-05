@@ -10,7 +10,7 @@ def extract_instruction(transcription, trigger_word):
 
 def handle_audio(recognizer, audio):
     """Handle the audio input and detect trigger word and instructions."""
-    trigger_word = "hello world"
+    trigger_word = "Zeke"
 
     try:
         transcription = recognizer.recognize_google(audio)

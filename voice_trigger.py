@@ -1,12 +1,11 @@
 import pyaudio
 import speech_recognition as sr
 
-def listen_for_instruction(recognizer, microphone):
+def listen_for_instruction(recognizer, source):
     """Listen for the next spoken instruction after the trigger phrase."""
     print("Listening for instruction...")
-    with microphone as source:
-        recognizer.adjust_for_ambient_noise(source)
-        audio = recognizer.listen(source)
+    recognizer.adjust_for_ambient_noise(source)
+    audio = recognizer.listen(source)
 
     try:
         instruction = recognizer.recognize_google(audio)
@@ -25,9 +24,9 @@ def main():
 
     print("Listening for trigger word 'Hello world'...")
 
-    while True:
-        with microphone as source:
-            recognizer.adjust_for_ambient_noise(source)
+    with microphone as source:
+        recognizer.adjust_for_ambient_noise(source)
+        while True:
             print("Say something!")
             audio = recognizer.listen(source)
 
@@ -37,7 +36,7 @@ def main():
 
                 if "hello world" in transcription.lower():
                     print("Trigger word 'Hello world' detected!")
-                    instruction = listen_for_instruction(recognizer, microphone)
+                    instruction = listen_for_instruction(recognizer, source)
                     if instruction:
                         print(f"Received instruction: {instruction}")
                     else:
@@ -50,6 +49,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 # import pyaudio

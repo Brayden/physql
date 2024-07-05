@@ -15,6 +15,16 @@ Setup New Raspberry Pi:
 - Updates: `sudo apt-get update`
 - Install npm & nodejs: `sudo apt-get install -y nodejs npm`
 - Install Chromium on Raspberry Pi: `sudo apt-get install chromium-browser`
+
+Microphone Support
+- Install Python package manager: `sudo apt-get install -y python3-pip`
+- Install Python virtual environment: `sudo apt-get install -y python3-venv`
+- Create virtual environment: `python3 -m venv myenv`
+- Activate environment: `source myenv/bin/activate`
+
+- Install dependencies: `sudo apt-get install -y portaudio19-dev python3-pyaudio`
+- Install speechrecognition: `pip install pyaudio speechrecognition`
+- Instal FLAC conversion utility: `sudo apt-get install flac`
 - Clone Github repository: `git@github.com:Brayden/physql.git`
 
 Auto-Start on Launch:

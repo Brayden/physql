@@ -25,9 +25,9 @@ def main():
 
     print("Listening for trigger word 'Hello world'...")
 
-    with microphone as source:
-        recognizer.adjust_for_ambient_noise(source)
-        while True:
+    while True:
+        with microphone as source:
+            recognizer.adjust_for_ambient_noise(source)
             print("Say something!")
             audio = recognizer.listen(source)
 

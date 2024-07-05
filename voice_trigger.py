@@ -47,7 +47,8 @@ def main():
     try:
         while True:
             # Keep the main thread alive
-            time.sleep(0.1)
+            # time.sleep(0.1)
+            pass
     except KeyboardInterrupt:
         stop_listening(wait_for_stop=False)
         print("Stopped listening")

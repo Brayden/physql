@@ -1,12 +1,23 @@
 import pyaudio
 import speech_recognition as sr
+import requests
 
 def extract_instruction(transcription, trigger_word):
     """Extract the instruction part from the transcription."""
     trigger_word_position = transcription.lower().find(trigger_word)
-    if trigger_word_position != -1:
+    if (trigger_word_position != -1):
         return transcription[trigger_word_position + len(trigger_word):].strip()
     return None
+
+def send_instruction_to_api(instruction):
+    """Send the extracted instruction to the local API."""
+    url = f"http://localhost:3000/instruction?instruction={instruction}"
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  # Raise an error for bad responses
+        print(f"API response: {response.status_code}, {response.text}")
+    except requests.exceptions.RequestException as e:
+        print(f"Error sending instruction to API: {e}")
 
 def handle_audio(recognizer, audio):
     """Handle the audio input and detect trigger word and instructions."""
@@ -21,6 +32,7 @@ def handle_audio(recognizer, audio):
             instruction = extract_instruction(transcription, trigger_word)
             if instruction:
                 print(f"Received instruction: {instruction}")
+                send_instruction_to_api(instruction)
             else:
                 print("No instruction received.")
     except sr.UnknownValueError:
@@ -36,7 +48,7 @@ def main():
     with microphone as source:
         recognizer.adjust_for_ambient_noise(source)
 
-    print("Listening for trigger word 'Hello world'...")
+    print("Listening for trigger word 'Zeke'...")
 
     def callback(recognizer, audio):
         handle_audio(recognizer, audio)
@@ -47,7 +59,6 @@ def main():
     try:
         while True:
             # Keep the main thread alive
-            # time.sleep(0.1)
             pass
     except KeyboardInterrupt:
         stop_listening(wait_for_stop=False)

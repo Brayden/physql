@@ -18,6 +18,7 @@ Setup New Raspberry Pi:
 
 Microphone Support
 - Install Python package manager: `sudo apt-get install -y python3-pip`
+- Install requests: `pip install requests`
 - Install Python virtual environment: `sudo apt-get install -y python3-venv`
 - Create virtual environment: `python3 -m venv myenv`
 - Activate environment: `source myenv/bin/activate`

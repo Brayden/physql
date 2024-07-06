@@ -23,7 +23,7 @@ async function generateScreenshot(fromPrompt = null) {
     await page.setViewport({ width: 800, height: 480 });
 
     // await 10 seconds for the page to load and query to load
-    await page.waitForTimeout(10000);
+    // await page.waitForTimeout(10000);
 
     const screenshotPath = 'page.png';
     await page.screenshot({ path: screenshotPath, fullPage: true });

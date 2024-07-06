@@ -14,6 +14,22 @@ async function generateScreenshot(fromPrompt = null) {
         index++;
     }
 
+    const response = await fetch(`https://app.outerbase.com/api/v1/ezql`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Source-Token': 'mm124dmh81lp169kuf8jpnxlnpeywdj1nmp3tqh6xaycebm7j7ifzr7y55z2bnc6',
+        },
+        body: JSON.stringify({
+            query: instruction,
+            // params: query.parameters,
+            run: true,
+        }),
+    })
+
+    let json = await response.json()
+    console.log('JSON Response: ', json)
+
     const browser = await puppeteer.launch({
         executablePath: '/usr/bin/chromium-browser',
     });

@@ -21,7 +21,7 @@ async function generateScreenshot(instruction = null) {
             'X-Source-Token': 'mm124dmh81lp169kuf8jpnxlnpeywdj1nmp3tqh6xaycebm7j7ifzr7y55z2bnc6',
         },
         body: JSON.stringify({
-            query: instruction,
+            query: `${instruction}. Return the data with an 'x' and 'y' key value pair to render a bar chart.`,
             run: true,
         }),
     })

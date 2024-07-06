@@ -26,7 +26,8 @@ async function generateScreenshot(fromPrompt = null) {
     // await page.waitForTimeout(10000);
 
     // Javascript await for 5 seconds
-    await setTimeout(5000);
+    // await setTimeout(5000);
+    await new Promise(resolve => setTimeout(resolve, 5000));
 
     const screenshotPath = 'page.png';
     await page.screenshot({ path: screenshotPath, fullPage: true });

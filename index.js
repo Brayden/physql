@@ -73,11 +73,12 @@ const server = http.createServer((req, res) => {
 
         // Here you can make a network call or execute commands based on the instruction
         // For example:
-        if (instruction === 'update display') {
-            generateScreenshot(instruction);
-        } else {
-            console.log(`Unknown instruction: ${instruction}`);
-        }
+        // if (instruction === 'update display') {
+        //     generateScreenshot(instruction);
+        // } else {
+        //     console.log(`Unknown instruction: ${instruction}`);
+        // }
+        generateScreenshot(instruction);
 
         // Send a response back to the client
         res.writeHead(200, { 'Content-Type': 'text/plain' });

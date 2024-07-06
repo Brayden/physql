@@ -101,32 +101,30 @@
         })
 
         let json = await response.json()
-        let error = null
-        let items = (await json.response?.results?.items) ?? []
-
-        // Generate an Observable Plotly chart based on the array of items
+        // let error = null
+        // let items = (await json.response?.results?.items) ?? []
         
-        const data = items.map((item) => {
-            return {
-                x: item.x,
-                y: item.y,
-                type: 'scatter',
-                mode: 'lines+markers',
-                marker: {color: 'black'},
-            }
-        })
+        // const data = items.map((item) => {
+        //     return {
+        //         x: item.x,
+        //         y: item.y,
+        //         type: 'scatter',
+        //         mode: 'lines+markers',
+        //         marker: {color: 'black'},
+        //     }
+        // })
 
-        const layout = {
-            title: 'Observable Plotly Chart',
-            xaxis: {
-                title: 'X Axis',
-            },
-            yaxis: {
-                title: 'Y Axis',
-            },
-        }
+        // const layout = {
+        //     title: 'Observable Plotly Chart',
+        //     xaxis: {
+        //         title: 'X Axis',
+        //     },
+        //     yaxis: {
+        //         title: 'Y Axis',
+        //     },
+        // }
 
-        Plotly.newPlot('chart-container', data, layout)
+        // Plotly.newPlot('chart-container', data, layout)
 
 
         // Update the `#chart-image` src based on index like `sample-chart-${index}.svg`

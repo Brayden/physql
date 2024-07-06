@@ -25,6 +25,9 @@ async function generateScreenshot(fromPrompt = null) {
     // await 10 seconds for the page to load and query to load
     // await page.waitForTimeout(10000);
 
+    // Javascript await for 5 seconds
+    await setTimeout(5000);
+
     const screenshotPath = 'page.png';
     await page.screenshot({ path: screenshotPath, fullPage: true });
     await browser.close();

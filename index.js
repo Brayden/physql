@@ -28,7 +28,8 @@ async function generateScreenshot(instruction = null) {
     })
 
     let json = await response.json()
-    console.log('JSON Response: ', json)
+    let items = (await json.response?.results?.items) ?? []
+    console.log('JSON Response: ', items)
 
     const browser = await puppeteer.launch({
         executablePath: '/usr/bin/chromium-browser',

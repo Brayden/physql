@@ -1,6 +1,9 @@
+import time
 import pyaudio
 import speech_recognition as sr
 import requests
+import os
+import sys
 
 def extract_instruction(transcription, trigger_word):
     """Extract the instruction part from the transcription."""
@@ -39,6 +42,15 @@ def handle_audio(recognizer, audio):
         print("Could not understand audio")
     except sr.RequestError as e:
         print(f"Could not request results; {e}")
+        if 'Broken pipe' in str(e):
+                print("Broken pipe detected, restarting script...")
+                restart_script()
+        # Could not request results; recognition connection failed: [Errno 32] Broken pipe
+
+def restart_script():
+    """Restart the script."""
+    print("Restarting script...")
+    os.execv(sys.executable, ['python'] + sys.argv)
 
 def main():
     recognizer = sr.Recognizer()
@@ -65,7 +77,16 @@ def main():
         print("Stopped listening")
 
 if __name__ == "__main__":
-    main()
+    while True:
+        try:
+            main()
+        except Exception as e:
+            print(f"Error: {e}")
+            if 'Broken pipe' in str(e):
+                print("Broken pipe detected, restarting script...")
+            else:
+                print("Unexpected error, restarting script...")
+            time.sleep(5)  # Wait a bit before restarting to avoid rapid restarts
 
 
 # import pyaudio

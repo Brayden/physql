@@ -78,7 +78,7 @@ const server = http.createServer((req, res) => {
         // } else {
         //     console.log(`Unknown instruction: ${instruction}`);
         // }
-        generateScreenshot(instruction);
+        generateScreenshot(instruction ?? 'Default');
 
         // Send a response back to the client
         res.writeHead(200, { 'Content-Type': 'text/plain' });

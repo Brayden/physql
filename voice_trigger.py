@@ -11,7 +11,7 @@ def extract_instruction(transcription, trigger_word):
 
 def send_instruction_to_api(instruction):
     """Send the extracted instruction to the local API."""
-    url = f"http://localhost:3000/instruction?instruction={instruction}"
+    url = f"http://localhost:3000/instruction?instruction={instruction}&index=0"
     try:
         response = requests.get(url)
         response.raise_for_status()  # Raise an error for bad responses

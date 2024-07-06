@@ -7,7 +7,7 @@ const { exec } = require('child_process');
 var index = 0;
 var screenshotTimer;
 
-async function generateScreenshot(fromPrompt = null) {
+async function generateScreenshot(fromPrompt) {
     if (index === 2) {
         index = 0;
     } else {

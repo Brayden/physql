@@ -32,8 +32,8 @@ def main():
         epd.display(epd.getbuffer(image))
 
         # Use partial update instead of full clear
-        epd.displayPartBaseImage(epd.getbuffer(image))
-        epd.displayPartial(epd.getbuffer(image))
+        # epd.displayPartBaseImage(epd.getbuffer(image))
+        # epd.displayPartial(epd.getbuffer(image))
 
         epd.sleep()
 

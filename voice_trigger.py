@@ -24,7 +24,7 @@ def send_instruction_to_api(instruction):
 
 def handle_audio(recognizer, audio):
     """Handle the audio input and detect trigger word and instructions."""
-    trigger_word = "zeke"
+    trigger_word = "star command"
 
     try:
         transcription = recognizer.recognize_google(audio)

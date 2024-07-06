@@ -14,21 +14,21 @@ async function generateScreenshot(instruction = null) {
         index++;
     }
 
-    // const response = await fetch(`https://app.outerbase.com/api/v1/ezql`, {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         'X-Source-Token': 'pi6l4umd9e7j763epktsj6runbvl2wef8x85sijctba9vfekndgcvdrhhkg1nr5g',
-    //     },
-    //     body: JSON.stringify({
-    //         query: `${instruction}. Return the data with an 'x' and 'y' key value pair to render a bar chart.`,
-    //         run: true,
-    //     }),
-    // })
+    const response = await fetch(`https://app.outerbase.com/api/v1/ezql`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Source-Token': 'pi6l4umd9e7j763epktsj6runbvl2wef8x85sijctba9vfekndgcvdrhhkg1nr5g',
+        },
+        body: JSON.stringify({
+            query: `${instruction}. Return the data with an 'x' and 'y' key value pair to render a bar chart.`,
+            run: true,
+        }),
+    })
 
-    // let json = await response.json()
-    // let items = (await json.response?.results?.items) ?? []
-    // console.log('JSON Response: ', items)
+    let json = await response.json()
+    let items = (await json.response?.results?.items) ?? []
+    console.log('JSON Response: ', items)
 
     const browser = await puppeteer.launch({
         executablePath: '/usr/bin/chromium-browser',

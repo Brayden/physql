@@ -22,7 +22,6 @@ async function generateScreenshot(instruction = null) {
         },
         body: JSON.stringify({
             query: instruction,
-            // params: query.parameters,
             run: true,
         }),
     })

@@ -7,7 +7,7 @@ const { exec } = require('child_process');
 var index = 0;
 var screenshotTimer;
 
-async function generateScreenshot(fromPrompt) {
+async function generateScreenshot(fromPrompt = null) {
     if (index === 2) {
         index = 0;
     } else {
@@ -18,7 +18,7 @@ async function generateScreenshot(fromPrompt) {
         executablePath: '/usr/bin/chromium-browser',
     });
     const page = await browser.newPage();
-    const url = fromPrompt ? `file://${__dirname}/src/index.html?index=${index}&fromPrompt=${fromPrompt}` : `file://${__dirname}/src/index.html?index=${index}`;
+    const url = fromPrompt ? `file://${__dirname}/src/index.html?index=${index}&instruction=${fromPrompt}` : `file://${__dirname}/src/index.html?index=${index}`;
     await page.goto(url);
     await page.setViewport({ width: 800, height: 480 });
 

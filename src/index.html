@@ -88,11 +88,11 @@
         document.getElementById("chart-image").src = `./sample-chart${index}.svg`;
 
         // Update the `#microphone-input` text based on prompt
-        // if (instruction) {
+        if (instruction) {
             document.getElementById("microphone-input").innerText = `"${instruction}"`;
-        // } else {
-            // document.getElementById("microphone-input").innerText = ``;
-        // }
+        } else {
+            document.getElementById("microphone-input").innerText = ``;
+        }
 
         // const qrCode = new QRCodeStyling({
         //     width: 150,

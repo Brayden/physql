@@ -72,7 +72,7 @@ function resetTimer() {
     }
 
     // Set a new timer
-    screenshotTimer = setTimeout(generateScreenshot, 60000);
+    // screenshotTimer = setTimeout(generateScreenshot, 60000);
 }
 
 // Initialize the timer for the first time

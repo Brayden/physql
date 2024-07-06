@@ -64,6 +64,8 @@ const server = http.createServer((req, res) => {
     const parsedUrl = url.parse(req.url, true);
     const { pathname, query } = parsedUrl;
 
+    console.log('Receiving request: ', req.url, req.method, query);
+
     // Handle the /instruction endpoint
     if (pathname === '/instruction' && req.method === 'GET') {
         const instruction = query.instruction;

@@ -54,7 +54,7 @@ def main():
         handle_audio(recognizer, audio)
 
     # Use listen_in_background for non-blocking audio capture
-    stop_listening = recognizer.listen_in_background(microphone, callback, phrase_time_limit=5)
+    stop_listening = recognizer.listen_in_background(microphone, callback, phrase_time_limit=None)
 
     try:
         while True:
@@ -66,6 +66,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 # import pyaudio

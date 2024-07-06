@@ -1,8 +1,8 @@
 # physql
 
 How to Run:
-1. `node index` in one screen for server
-2. `python3 -m venv myenv && source myenv/bin/activate` for microphone
+1. `node index` in one terminal for server
+2. `python3 -m venv myenv && source myenv/bin/activate` for microphone in another terminal
 
 Troubleshoot:
 

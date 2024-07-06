@@ -4,6 +4,9 @@
 
         <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
         
+        <!-- Import Plotly -->
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
         <style>
             * {
                 margin: 0;
@@ -84,8 +87,50 @@
         const index = urlParams.get("index");
         const instruction = urlParams.get("instruction");
 
+        const response = await fetch(`https://app.outerbase.com/api/v1/ezql`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Source-Token': 'mm124dmh81lp169kuf8jpnxlnpeywdj1nmp3tqh6xaycebm7j7ifzr7y55z2bnc6',
+            },
+            body: JSON.stringify({
+                query: instruction,
+                // params: query.parameters,
+                run: true,
+            }),
+        })
+
+        let json = await response.json()
+        let error = null
+        let items = (await json.response?.results?.items) ?? []
+
+        // Generate an Observable Plotly chart based on the array of items
+        
+        const data = items.map((item) => {
+            return {
+                x: item.x,
+                y: item.y,
+                type: 'scatter',
+                mode: 'lines+markers',
+                marker: {color: 'black'},
+            }
+        })
+
+        const layout = {
+            title: 'Observable Plotly Chart',
+            xaxis: {
+                title: 'X Axis',
+            },
+            yaxis: {
+                title: 'Y Axis',
+            },
+        }
+
+        Plotly.newPlot('chart-container', data, layout)
+
+
         // Update the `#chart-image` src based on index like `sample-chart-${index}.svg`
-        document.getElementById("chart-image").src = `./sample-chart${index}.svg`;
+        // document.getElementById("chart-image").src = `./sample-chart${index}.svg`;
 
         // Update the `#microphone-input` text based on prompt
         if (instruction) {

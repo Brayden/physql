@@ -82,14 +82,14 @@
         // Get query param `index`
         const urlParams = new URLSearchParams(window.location.search);
         const index = urlParams.get("index");
-        const promptMessage = urlParams.get("prompt");
+        const instruction = urlParams.get("instruction");
 
         // Update the `#chart-image` src based on index like `sample-chart-${index}.svg`
         document.getElementById("chart-image").src = `./sample-chart${index}.svg`;
 
         // Update the `#microphone-input` text based on prompt
-        if (promptMessage) {
-            document.getElementById("microphone-input").innerText = `"${promptMessage}"`;
+        if (instruction) {
+            document.getElementById("microphone-input").innerText = `"${instruction}"`;
         } else {
             document.getElementById("microphone-input").innerText = ``;
         }

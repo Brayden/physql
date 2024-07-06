@@ -74,7 +74,7 @@
                         'X-Source-Token': 'mm124dmh81lp169kuf8jpnxlnpeywdj1nmp3tqh6xaycebm7j7ifzr7y55z2bnc6',
                     },
                     body: JSON.stringify({
-                        query: instruction,
+                        query: `${instruction}. Return the data with an 'x' and 'y' key value pair to render a bar chart.`,
                         run: true,
                     }),
                 });
@@ -86,19 +86,19 @@
                     return {
                         x: item.x,
                         y: item.y,
-                        type: 'scatter',
-                        mode: 'lines+markers',
+                        type: 'bar',
                         marker: { color: 'black' },
                     };
                 });
 
                 const layout = {
-                    title: 'Observable Plotly Chart',
+                    title: 'Observable Plotly Bar Chart',
                     xaxis: { title: 'X Axis' },
                     yaxis: { title: 'Y Axis' },
                 };
 
                 Plotly.newPlot('chart-container', data, layout);
+
 
                 // Update the `#chart-image` src based on index like `sample-chart-${index}.svg`
                 // document.getElementById("chart-image").src = `./sample-chart${index}.svg`;

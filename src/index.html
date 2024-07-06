@@ -52,12 +52,12 @@
 <body>
     <div id="container">
         <div id="chart-container">
-            <img id="chart-image" alt="sample-chart" />
+            <!-- <img id="chart-image" alt="sample-chart" /> -->
             <div id="microphone-input">
                 "Your input here."
             </div>
         </div>
-        <div id="qr-code"></div>
+        <!-- <div id="qr-code"></div> -->
     </div>
     <script type="text/javascript">
         async function fetchDataAndRenderChart() {
@@ -80,16 +80,39 @@
                 });
 
                 const json = await response.json();
-                const items = json.response?.results?.items ?? [];
+                let items = json.response?.results?.items ?? [];
 
-                const data = items.map((item) => {
-                    return {
-                        x: item.x,
-                        y: item.y,
-                        type: 'bar',
-                        marker: { color: 'black' },
-                    };
-                });
+                // items =  [
+                //     { x: '2024-06-29', y: '11' },
+                //     { x: '2024-06-30', y: '19' },
+                //     { x: '2024-07-01', y: '31' },
+                //     { x: '2024-07-02', y: '39' },
+                //     { x: '2024-07-03', y: '53' },
+                //     { x: '2024-07-04', y: '31' },
+                //     { x: '2024-07-05', y: '23' },
+                //     { x: '2024-07-06', y: '12' }
+                // ];
+
+                const xValues = items.map(item => item.x);
+                const yValues = items.map(item => Number(item.y));
+
+                const data = [{
+                    x: xValues,
+                    y: yValues,
+                    type: 'bar',
+                    marker: { color: 'black' },
+                }];
+
+                // const data = items.map((item) => {
+                //     return {
+                //         x: new Date(item.x),
+                //         y: Number(item.y),
+                //         type: 'bar',
+                //         marker: { color: 'black' },
+                //     };
+                // });
+
+                // console.log('Data: ', data)
 
                 const layout = {
                     // title: 'Observable Plotly Bar Chart',

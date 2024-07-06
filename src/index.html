@@ -40,6 +40,18 @@
                 left: 50%;
                 transform: translate(-50%, -50%);
             }
+
+            #microphone-input {
+                position: absolute;
+                bottom: 16px;
+                left: 16px;
+                width: calc(100% - 32px);
+                background-color: black;
+                color: white;
+                text-align: center;
+                line-height: 24px;
+                font-size: 20px;
+            }
         </style>
     </head>
 
@@ -52,8 +64,12 @@
                 <!-- sourceID=c0ddc16c-377c-4aaa-9cf8-ac8aa86ad19f -->
                 <!-- baseID=8e63ca41-6172-479c-8da4-663e2df63e33 -->
 
-                <!-- Render `./sample-chart.svg -->
+                <!-- Render chart -->
                 <img id="chart-image" alt="sample-chart" />
+
+                <div id="microphone-input">
+                    "Your input here."
+                </div>
             </div>
 
             <div id="qr-code">
@@ -66,16 +82,24 @@
         // Get query param `index`
         const urlParams = new URLSearchParams(window.location.search);
         const index = urlParams.get("index");
+        const promptMessage = urlParams.get("prompt");
 
         // Update the `#chart-image` src based on index like `sample-chart-${index}.svg`
         document.getElementById("chart-image").src = `./sample-chart${index}.svg`;
 
-        const qrCode = new QRCodeStyling({
-            width: 150,
-            height: 150,
-            data: "http://localhost:8080/phySQL/",
-        });
+        // Update the `#microphone-input` text based on prompt
+        if (promptMessage) {
+            document.getElementById("microphone-input").innerText = `"${promptMessage}"`;
+        } else {
+            document.getElementById("microphone-input").innerText = ``;
+        }
 
-        qrCode.append(document.getElementById("qr-code"));
+        // const qrCode = new QRCodeStyling({
+        //     width: 150,
+        //     height: 150,
+        //     data: "http://localhost:8080/phySQL/",
+        // });
+
+        // qrCode.append(document.getElementById("qr-code"));
     </script>
 </html>

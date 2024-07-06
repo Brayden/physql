@@ -7,7 +7,7 @@ const { exec } = require('child_process');
 var index = 0;
 var screenshotTimer;
 
-async function generateScreenshot() {
+async function generateScreenshot(fromPrompt = null) {
     if (index === 2) {
         index = 0;
     } else {
@@ -18,8 +18,12 @@ async function generateScreenshot() {
         executablePath: '/usr/bin/chromium-browser',
     });
     const page = await browser.newPage();
-    await page.goto(`file://${__dirname}/src/index.html?index=${index}`);
+    const url = fromPrompt ? `file://${__dirname}/src/index.html?index=${index}&fromPrompt=${fromPrompt}` : `file://${__dirname}/src/index.html?index=${index}`;
+    await page.goto(url);
     await page.setViewport({ width: 800, height: 480 });
+
+    // await 10 seconds for the page to load and query to load
+    await page.waitForTimeout(10000);
 
     const screenshotPath = 'page.png';
     await page.screenshot({ path: screenshotPath, fullPage: true });
@@ -68,7 +72,7 @@ const server = http.createServer((req, res) => {
         // Here you can make a network call or execute commands based on the instruction
         // For example:
         if (instruction === 'update display') {
-            generateScreenshot();
+            generateScreenshot(instruction);
         } else {
             console.log(`Unknown instruction: ${instruction}`);
         }

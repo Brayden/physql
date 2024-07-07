@@ -69,21 +69,12 @@ const server = http.createServer((req, res) => {
     const { pathname, query } = parsedUrl;
 
     console.log('Receiving request: ', req.url, req.method);
-    console.log('Parsed URL:', parsedUrl);
-    console.log('Query parameters:', query);
-
     // Handle the /instruction endpoint
     if (pathname === '/instruction' && req.method === 'GET') {
         const instruction = query.instruction;
         console.log(`Received instruction: ${instruction}`);
 
-        // Here you can make a network call or execute commands based on the instruction
-        // For example:
-        // if (instruction === 'update display') {
-        //     generateScreenshot(instruction);
-        // } else {
-        //     console.log(`Unknown instruction: ${instruction}`);
-        // }
+        // Generate a new screenshot with the instruction
         generateScreenshot(instruction ?? 'Default');
 
         // Send a response back to the client

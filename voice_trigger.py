@@ -50,7 +50,7 @@ def handle_audio(recognizer, audio):
 def restart_script():
     """Restart the script."""
     print("Restarting script...")
-    os.execv(sys.executable, ['python'] + sys.argv)
+    os.execv(sys.executable, [sys.executable] + sys.argv)
 
 def main():
     recognizer = sr.Recognizer()

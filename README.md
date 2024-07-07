@@ -2,7 +2,10 @@
 
 How to Run:
 1. `node index` in one terminal for server
-2. `python3 -m venv myenv && source myenv/bin/activate` for microphone in another terminal
+2. `./run_voice_trigger.sh` for the microphone
+3. Maybe we can do `node index && ./run_voice_trigger.sh` to do it in one script?
+
+2. `python3 -m venv myenv && source myenv/bin/activate` and once the environment is running run `python3 voice_trigger.py` for microphone in another terminal
 
 Troubleshoot:
 

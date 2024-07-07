@@ -36,6 +36,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
+
         #microphone-input {
             position: absolute;
             bottom: 16px;
@@ -46,6 +47,7 @@
             text-align: center;
             line-height: 24px;
             font-size: 20px;
+            padding: 4px 0;
         }
     </style>
 </head>
@@ -120,7 +122,7 @@
                     // yaxis: { title: 'Y Axis' },
                 };
 
-                Plotly.newPlot('chart-container', data, layout);
+                Plotly.newPlot('chart-container', data, layout, {displayModeBar: false});
 
 
                 // Update the `#chart-image` src based on index like `sample-chart-${index}.svg`

@@ -1,17 +1,18 @@
 # physql
 
+TODO:
+1. Create `systemd` scripts to automatically run `node index` and `./run_voice_trigger.sh` on startup
+2. Create `systemd` script to clear the screen on shutdown
+
 How to Run:
 1. `node index` in one terminal for server
-2. `./run_voice_trigger.sh` for the microphone
-3. Maybe we can do `node index && ./run_voice_trigger.sh` to do it in one script?
-
-2. `python3 -m venv myenv && source myenv/bin/activate` and once the environment is running run `python3 voice_trigger.py` for microphone in another terminal
+2. `./run_voice_trigger.sh` in another terminal for the microphone
 
 Troubleshoot:
 
 - If the screen doesn't load anything try running the python script directly: `python3 display_image.py`. This should be auto-executed by the `node index` script though.
 
-- Install Chromium dependencies: 
+- Install Chromium dependencies:  
 ```sudo apt-get install gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
 ```
 

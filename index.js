@@ -63,7 +63,7 @@ function resetTimer() {
 resetTimer();
 
 // Create an HTTP server
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
     // Parse the request URL
     const parsedUrl = url.parse(req.url, true);
     const { pathname, query } = parsedUrl;
@@ -73,6 +73,22 @@ const server = http.createServer((req, res) => {
     if (pathname === '/instruction' && req.method === 'GET') {
         const instruction = query.instruction;
         console.log(`Received instruction: ${instruction}`);
+
+        const response = await fetch(`https://app.outerbase.com/api/v1/ezql`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Source-Token': 'r2g8x54vubdqixe1l1uv8gaidarghvk5nf76efmcppzxle5jtnl76ii21imzthre',
+            },
+            body: JSON.stringify({
+                query: `${instruction}. Return the data with an 'x' and 'y' key value pair to render a bar chart.`,
+                run: true,
+            }),
+        });
+
+        const json = await response.json();
+        let items = json.response?.results?.items ?? [];
+        console.log('Items: ', items);
 
         // Generate a new screenshot with the instruction
         generateScreenshot(instruction ?? 'Default');

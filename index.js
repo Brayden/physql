@@ -1,5 +1,4 @@
 const puppeteer = require('puppeteer');
-const fs = require('fs');
 const http = require('http');
 const url = require('url');
 const { exec } = require('child_process');
@@ -18,7 +17,7 @@ async function generateScreenshot(instruction = null) {
         executablePath: '/usr/bin/chromium-browser',
     });
     const page = await browser.newPage();
-    const url = instruction ? `file://${__dirname}/src/index.html?index=${index}&instruction=${instruction}` : `file://${__dirname}/src/index.html?index=${index}`;
+    const url = instruction ? `file://${__dirname}/src/index.html?instruction=${instruction}` : `file://${__dirname}/src/index.html?index=${index}`;
     await page.goto(url);
     await page.setViewport({ width: 800, height: 480 });
 
@@ -27,7 +26,7 @@ async function generateScreenshot(instruction = null) {
 
     // Javascript await for 5 seconds
     // await setTimeout(5000);
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 3000));
 
     const screenshotPath = 'page.png';
     await page.screenshot({ path: screenshotPath, fullPage: true });
@@ -57,6 +56,7 @@ function resetTimer() {
 
     // Set a new timer
     // screenshotTimer = setTimeout(generateScreenshot, 60000);
+    // Uncomment the line above to generate a screenshot every 60 seconds
 }
 
 // Initialize the timer for the first time
@@ -73,22 +73,6 @@ const server = http.createServer(async (req, res) => {
     if (pathname === '/instruction' && req.method === 'GET') {
         const instruction = query.instruction;
         console.log(`Received instruction: ${instruction}`);
-
-        const response = await fetch(`https://app.outerbase.com/api/v1/ezql`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Source-Token': 'r2g8x54vubdqixe1l1uv8gaidarghvk5nf76efmcppzxle5jtnl76ii21imzthre',
-            },
-            body: JSON.stringify({
-                query: `${instruction}. Return the data with an 'x' and 'y' key value pair to render a bar chart.`,
-                run: true,
-            }),
-        });
-
-        const json = await response.json();
-        let items = json.response?.results?.items ?? [];
-        console.log('Items: ', items);
 
         // Generate a new screenshot with the instruction
         generateScreenshot(instruction ?? 'Default');
@@ -108,46 +92,3 @@ const PORT = 3000;
 server.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
 });
-
-
-// const puppeteer = require('puppeteer');
-// const fs = require('fs');
-
-// var index = 0;
-
-// async function generateScreenshot() {
-//     if (index === 2) {
-//         index = 0;
-//     } else {
-//         index++;
-//     }
-
-//     const browser = await puppeteer.launch({
-//         executablePath: '/usr/bin/chromium-browser',
-//     });
-//     const page = await browser.newPage();
-//     await page.goto(`file://${__dirname}/src/index.html?index=${index}`);
-//     await page.setViewport({ width: 800, height: 480 });
-
-//     const screenshotPath = 'page.png';
-//     await page.screenshot({ path: screenshotPath, fullPage: true });
-//     await browser.close();
-
-//     console.log(`Screenshot saved as ${screenshotPath}`);
-
-//     // Execute the command `python3 display_image.py`
-//     const { exec } = require('child_process');
-//     exec(`python3 display_image.py`, (error, stdout, stderr) => {
-//         if (error) {
-//             console.error(`exec error: ${error}`);
-//             return;
-//         }
-
-//         console.log('Updated the display...')
-//     });
-// }
-
-// generateScreenshot();
-
-// // Call `generateScreenshot()` every 60 seconds
-// setInterval(generateScreenshot, 60000);

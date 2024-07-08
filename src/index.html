@@ -3,8 +3,8 @@
 <head>
     <title>phySQL</title>
     <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
-    <!-- Import Plotly -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    
     <style>
         * {
             margin: 0;
@@ -85,17 +85,6 @@
                 const json = await response.json();
                 let items = json.response?.results?.items ?? [];
 
-                // items =  [
-                //     { x: '2024-06-29', y: '11' },
-                //     { x: '2024-06-30', y: '19' },
-                //     { x: '2024-07-01', y: '31' },
-                //     { x: '2024-07-02', y: '39' },
-                //     { x: '2024-07-03', y: '53' },
-                //     { x: '2024-07-04', y: '31' },
-                //     { x: '2024-07-05', y: '23' },
-                //     { x: '2024-07-06', y: '12' }
-                // ];
-
                 const xValues = items.map(item => item.x);
                 const yValues = items.map(item => Number(item.y));
 
@@ -106,28 +95,14 @@
                     marker: { color: 'black' },
                 }];
 
-                // const data = items.map((item) => {
-                //     return {
-                //         x: new Date(item.x),
-                //         y: Number(item.y),
-                //         type: 'bar',
-                //         marker: { color: 'black' },
-                //     };
-                // });
-
-                // console.log('Data: ', data)
-
                 const layout = {
                     // title: 'Observable Plotly Bar Chart',
                     // xaxis: { title: 'X Axis' },
                     // yaxis: { title: 'Y Axis' },
                 };
 
+                // Update the chart-container to show the Plotly chart
                 Plotly.newPlot('chart-container', data, layout, {displayModeBar: false});
-
-
-                // Update the `#chart-image` src based on index like `sample-chart-${index}.svg`
-                // document.getElementById("chart-image").src = `./sample-chart${index}.svg`;
 
                 // Update the `#microphone-input` text based on prompt
                 if (instruction) {

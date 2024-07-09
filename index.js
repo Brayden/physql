@@ -2,11 +2,14 @@ const puppeteer = require('puppeteer');
 const http = require('http');
 const url = require('url');
 const { exec } = require('child_process');
+require('dotenv').config();
 
 var index = 0;
 var screenshotTimer;
 
 async function generateScreenshot(instruction = null) {
+    const apiKey = process.env.API_KEY;
+
     if (index === 2) {
         index = 0;
     } else {
@@ -17,15 +20,11 @@ async function generateScreenshot(instruction = null) {
         executablePath: '/usr/bin/chromium-browser',
     });
     const page = await browser.newPage();
-    const url = instruction ? `file://${__dirname}/src/index.html?instruction=${instruction}` : `file://${__dirname}/src/index.html?index=${index}`;
+    const url = instruction ? `file://${__dirname}/src/index.html?instruction=${instruction}&apiKey=${apiKey}` : `file://${__dirname}/src/index.html?index=${index}&apiKey=${apiKey}`;
     await page.goto(url);
     await page.setViewport({ width: 800, height: 480 });
 
-    // await 10 seconds for the page to load and query to load
-    // await page.waitForTimeout(10000);
-
-    // Javascript await for 5 seconds
-    // await setTimeout(5000);
+    // Javascript await for 3 seconds
     await new Promise(resolve => setTimeout(resolve, 3000));
 
     const screenshotPath = 'page.png';

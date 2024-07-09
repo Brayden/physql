@@ -67,13 +67,15 @@
             const urlParams = new URLSearchParams(window.location.search);
             const index = urlParams.get("index");
             const instruction = urlParams.get("instruction");
+            const apiKey = urlParams.get("apiKey");
 
             try {
                 const response = await fetch(`https://app.outerbase.com/api/v1/ezql`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-Source-Token': 'r2g8x54vubdqixe1l1uv8gaidarghvk5nf76efmcppzxle5jtnl76ii21imzthre',
+                        // 'X-Source-Token': 'r2g8x54vubdqixe1l1uv8gaidarghvk5nf76efmcppzxle5jtnl76ii21imzthre',
+                        'X-Source-Token': apiKey,
                     },
                     body: JSON.stringify({
                         query: `${instruction}. Return the data with an 'x' and 'y' key value pair to render a bar chart.`,

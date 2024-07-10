@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>phySQL</title>
-    <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
     <style>
@@ -10,45 +9,51 @@
             margin: 0;
             color: white;
         }
+
         body {
             background-color: black;
         }
+
         #container {
             width: 800px;
             height: 480px;
             background-color: white;
             position: relative;
         }
+
         #chart-container {
             width: 100%;
             height: 100%;
         }
+
         #chart-container .plotly {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            margin-bottom: -30px;
-        }
-        #qr-code {
-            opacity: 0;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
 
+        #plot-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        #plot-container > div {
+            margin-top: 30px;
+        }
+
         #microphone-input {
             position: absolute;
-            top: 16px;
-            left: 16px;
-            width: calc(100% - 32px);
+            z-index: 1;
+            top: 24px;
+            left: 24px;
+            width: calc(100% - 48px);
             background-color: transparent;
             border: 1px solid black;
             color: black;
             text-align: center;
             line-height: 24px;
-            font-size: 20px;
+            font-size: 22px;
             padding: 4px 0;
         }
     </style>
@@ -59,8 +64,11 @@
             <div id="microphone-input">
                 <!-- This text will be updated based on the prompt -->
             </div>
+
+            <div id="plot-container">
+                <!-- Plotly chart will be rendered here -->
+            </div>
         </div>
-        <!-- <div id="qr-code"></div> -->
     </div>
     <script type="text/javascript">
         async function fetchDataAndRenderChart() {
@@ -103,7 +111,7 @@
                 };
 
                 // Update the chart-container to show the Plotly chart
-                Plotly.newPlot('chart-container', data, layout, {displayModeBar: false});
+                Plotly.newPlot('plot-container', data, layout, {displayModeBar: false});
 
                 // Update the `#microphone-input` text based on prompt
                 if (instruction) {

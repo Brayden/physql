@@ -17,6 +17,8 @@ run_voice_trigger() {
 
 # Function to run the Node.js script
 run_node_script() {
+    pip install requests waveshare-epd pillow
+
     while true; do
         node /home/pi/physql/index.js #>> /home/pi/path_to_your_script/logs/node_index.log 2>&1
         echo "Node.js script crashed with exit code $?.  Respawning.." >&2

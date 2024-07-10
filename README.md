@@ -59,7 +59,7 @@ WantedBy=multi-user.target
 - `sudo systemctl start voice_trigger_and_node.service`
 - Check the status of the script (optional): `sudo systemctl status voice_trigger_and_node.service`
 
-Auto-Stop on Shutdown:
+**Auto-Stop on Shutdown:**
 - `sudo nano /etc/systemd/system/shutdown_script.service`
 - Paste the following into the file:
 ```

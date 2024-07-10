@@ -82,7 +82,12 @@ WantedBy=multi-user.target
 - Check the status of the script (optional): `sudo systemctl status voice_trigger_and_node.service`
 
 **Startup Node Script:**
-- `sudo nano /etc/systemd/system/node_server.service`
+- `crontab -e`
+- Add the following contents to the bottom of the file
+```
+@reboot cd physql && /usr/bin/node index
+```
+<!-- - `sudo nano /etc/systemd/system/node_server.service`
 - Add the following contents to the file
 ```
 [Unit]
@@ -102,9 +107,9 @@ Environment="PATH=/home/pi/physql/myenv/bin:/usr/local/sbin:/usr/local/bin:/usr/
 WantedBy=multi-user.target
 ```
 - `sudo systemctl daemon-reload`
-- `sudo systemctl enable voice_trigger_and_node.service`
-- `sudo systemctl start voice_trigger_and_node.service`
-- Check the status of the script (optional): `sudo systemctl status voice_trigger_and_node.service`
+- `sudo systemctl enable node_server.service`
+- `sudo systemctl start node_server.service`
+- Check the status of the script (optional): `sudo systemctl status node_server.service` -->
 
 **Auto-Stop on Shutdown:**
 - `sudo nano /etc/systemd/system/shutdown_script.service`

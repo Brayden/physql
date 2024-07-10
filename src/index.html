@@ -33,15 +33,6 @@
             transform: translate(-50%, -50%);
         }
 
-        #plot-container {
-            width: 100%;
-            height: 100%;
-        }
-
-        #plot-container > div {
-            margin-top: 30px;
-        }
-
         #microphone-input {
             position: absolute;
             z-index: 1;
@@ -111,7 +102,7 @@
                 };
 
                 // Update the chart-container to show the Plotly chart
-                Plotly.newPlot('plot-container', data, layout, {displayModeBar: false});
+                Plotly.newPlot('chart-container', data, layout, {displayModeBar: false});
 
                 // Update the `#microphone-input` text based on prompt
                 if (instruction) {

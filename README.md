@@ -63,7 +63,8 @@ WantedBy=multi-user.target
 ```
 [Unit]
 Description=Voice Trigger and Node.js Service
-After=network.target
+After=network.target local-fs.target
+RequiresMountsFor=/home/pi/physql
 
 [Service]
 User=pi
@@ -72,7 +73,6 @@ WorkingDirectory=/home/pi/physql
 ExecStart=/home/pi/physql/run_voice_trigger.sh
 Restart=always
 RestartSec=5
-Environment="PATH=/home/pi/physql/myenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 [Install]
 WantedBy=multi-user.target

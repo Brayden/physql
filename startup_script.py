@@ -19,7 +19,7 @@ def main():
 
         print("Loading a built-in bitmap font...")
         # Use a larger built-in bitmap font
-        font = ImageFont.truetype("arial", 24)  # Adjust the size as needed
+        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 48)  # Adjust the size as needed
 
         print("Drawing text on the image...")
         # Draw the text "phySQL" on the image

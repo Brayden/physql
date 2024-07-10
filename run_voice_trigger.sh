@@ -8,13 +8,24 @@ source myenv/bin/activate
 pip install SpeechRecognition pyaudio requests
 
 # Function to run the voice trigger script
-run_script() {
+run_voice_trigger() {
     while true; do
         python3 voice_trigger.py
-        echo "Script crashed with exit code $?.  Respawning.." >&2
+        echo "Voice trigger script crashed with exit code $?.  Respawning.." >&2
         sleep 5
     done
 }
 
-# Run the script
-run_script
+# Function to run the Node.js script
+run_node_script() {
+    while true; do
+        node index.js
+        echo "Node.js script crashed with exit code $?.  Respawning.." >&2
+        sleep 5
+    done
+}
+
+# Run both scripts in parallel
+run_voice_trigger &
+run_node_script &
+wait

@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import sys
 import os
 from waveshare_epd import epd7in5_V2

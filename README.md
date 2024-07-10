@@ -51,6 +51,7 @@ User=pi
 [Install]
 WantedBy=multi-user.target
 ```
+- `chmod +x startup_script.py`
 - `sudo systemctl daemon-reload`
 - `sudo systemctl enable epd_display.service`
 - `sudo systemctl start epd_display.service`
@@ -76,6 +77,7 @@ Environment="PATH=/home/pi/physql/myenv/bin:/usr/local/sbin:/usr/local/bin:/usr/
 [Install]
 WantedBy=multi-user.target
 ```
+- `chmod +x run_voice_trigger.sh`
 - `sudo systemctl daemon-reload`
 - `sudo systemctl enable voice_trigger_and_node.service`
 - `sudo systemctl start voice_trigger_and_node.service`
@@ -94,15 +96,16 @@ WantedBy=multi-user.target
 ```
 [Unit]
 Description=Node.js Service
-After=network.target
+After=network.target local-fs.target
+RequiresMountsFor=/home/pi/physql
 
 [Service]
 User=pi
 Group=pi
 WorkingDirectory=/home/pi/physql
-ExecStart=/home/pi/physql/run_node_server.sh
-Restart=always
-Environment=NODE_ENV=production
+ExecStart=/usr/bin/node /home/pi/physql/index.js
+Restart=on-failure
+RestartSec=5
 
 [Install]
 WantedBy=multi-user.target

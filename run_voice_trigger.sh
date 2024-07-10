@@ -7,6 +7,11 @@ source myenv/bin/activate
 # Ensure all necessary packages are installed
 pip install SpeechRecognition pyaudio requests
 
+show_loading_screen() {
+    python3 startup_script.py
+    echo "Startup screen displaying.."
+}
+
 # Function to run the voice trigger script
 run_voice_trigger() {
     while true; do
@@ -26,6 +31,7 @@ run_node_script() {
 }
 
 # Run both scripts in parallel
+show_loading_screen &
 run_voice_trigger &
 run_node_script &
 wait

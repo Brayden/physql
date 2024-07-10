@@ -57,15 +57,9 @@ WantedBy=multi-user.target
 - `sudo systemctl daemon-reload`
 - `sudo systemctl enable voice_trigger_and_node.service`
 - `sudo systemctl start voice_trigger_and_node.service`
-- `sudo systemctl status voice_trigger_and_node.service`
+- Check the status of the script (optional): `sudo systemctl status voice_trigger_and_node.service`
 
-------
-
-Auto-Stop on Shutdown (NOT WORKING):
-- crontab -e
-- Add `@reboot /physql/shutdown_script.sh` at bottom of file
-
-Auto-Stop on Shutdown (NOT WORKING):
+Auto-Stop on Shutdown:
 - `sudo nano /etc/systemd/system/shutdown_script.service`
 - Paste the following into the file:
 ```
@@ -84,3 +78,4 @@ WantedBy=halt.target poweroff.target reboot.target
 ```
 - `sudo systemctl daemon-reload`
 - `sudo systemctl enable shutdown_script.service`
+- Check the status of the script (optional): `sudo systemctl status shutdown_script.service`

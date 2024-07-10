@@ -17,15 +17,15 @@ run_voice_trigger() {
 }
 
 # Function to run the Node.js script
-run_node_script() {
-    while true; do
-        node index.js #>> /home/pi/path_to_your_script/logs/node_index.log 2>&1
-        echo "Node.js script crashed with exit code $?.  Respawning.." >&2
-        sleep 5
-    done
-}
+# run_node_script() {
+#     while true; do
+#         node index.js #>> /home/pi/path_to_your_script/logs/node_index.log 2>&1
+#         echo "Node.js script crashed with exit code $?.  Respawning.." >&2
+#         sleep 5
+#     done
+# }
 
 # Run both scripts in parallel
-run_node_script &
+# run_node_script &
 run_voice_trigger &
 wait

@@ -81,6 +81,31 @@ WantedBy=multi-user.target
 - `sudo systemctl start voice_trigger_and_node.service`
 - Check the status of the script (optional): `sudo systemctl status voice_trigger_and_node.service`
 
+**Startup Node Script:**
+- `sudo nano /etc/systemd/system/node_server.service`
+- Add the following contents to the file
+```
+[Unit]
+Description=Node.js Service
+After=network.target
+
+[Service]
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/physql
+ExecStart=/home/pi/physql/run_node_server.sh
+Restart=always
+RestartSec=5
+Environment="PATH=/home/pi/physql/myenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+[Install]
+WantedBy=multi-user.target
+```
+- `sudo systemctl daemon-reload`
+- `sudo systemctl enable voice_trigger_and_node.service`
+- `sudo systemctl start voice_trigger_and_node.service`
+- Check the status of the script (optional): `sudo systemctl status voice_trigger_and_node.service`
+
 **Auto-Stop on Shutdown:**
 - `sudo nano /etc/systemd/system/shutdown_script.service`
 - Paste the following into the file:

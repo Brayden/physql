@@ -3,9 +3,10 @@
 # Set up and activate the virtual environment
 python3 -m venv myenv
 source myenv/bin/activate
+pip install waveshare-epd
 
 # Ensure all necessary packages are installed
-pip install SpeechRecognition pyaudio requests
+pip install SpeechRecognition pyaudio requests waveshare-epd
 
 show_loading_screen() {
     python3 startup_script.py

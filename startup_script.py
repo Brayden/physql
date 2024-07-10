@@ -3,7 +3,7 @@
 import sys
 import os
 from waveshare_epd import epd7in5_V2
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
 def main():
     try:
@@ -11,9 +11,17 @@ def main():
         epd.init()
         epd.Clear()
 
-        # Draw the text "PHYSQL" on the e-paper screen
-        image = Image.new('1', (epd7in5_V2.EPD_HEIGHT, epd7in5_V2.EPD_WIDTH), 255)
-        epd.display_string_at(image, 10, 10, "phySQL", 16, 0)
+        # Create an image object
+        image = Image.new('1', (epd7in5_V2.EPD_WIDTH, epd7in5_V2.EPD_HEIGHT), 255)  # 1-bit color, white background
+        draw = ImageDraw.Draw(image)
+        
+        # Use a truetype font
+        font = ImageFont.load_default()
+
+        # Draw the text "phySQL" on the image
+        draw.text((10, 10), "phySQL", font=font, fill=0)
+
+        # Display the image on the e-paper screen
         epd.display(epd.getbuffer(image))
 
         epd.sleep()

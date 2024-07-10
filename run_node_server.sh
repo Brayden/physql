@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# Navigate to the project directory
+cd /home/pi/physql
+
+# Optionally, activate nvm or any other environment setup
+# source ~/.nvm/nvm.sh
+# nvm use 14
+
+# Start the Node.js application
+/usr/bin/node index.js
+
+
 # Function to run the Node.js script
 # run_node_script() {
 #     while true; do

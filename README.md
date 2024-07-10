@@ -82,12 +82,14 @@ WantedBy=multi-user.target
 - Check the status of the script (optional): `sudo systemctl status voice_trigger_and_node.service`
 
 **Startup Node Script:**
-- `crontab -e`
+<!-- - `crontab -e`
 - Add the following contents to the bottom of the file
 ```
 @reboot cd physql && /usr/bin/node index
-```
-<!-- - `sudo nano /etc/systemd/system/node_server.service`
+``` -->
+
+
+- `sudo nano /etc/systemd/system/node_server.service`
 - Add the following contents to the file
 ```
 [Unit]
@@ -100,8 +102,7 @@ Group=pi
 WorkingDirectory=/home/pi/physql
 ExecStart=/home/pi/physql/run_node_server.sh
 Restart=always
-RestartSec=5
-Environment="PATH=/home/pi/physql/myenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+Environment=NODE_ENV=production
 
 [Install]
 WantedBy=multi-user.target
@@ -109,7 +110,7 @@ WantedBy=multi-user.target
 - `sudo systemctl daemon-reload`
 - `sudo systemctl enable node_server.service`
 - `sudo systemctl start node_server.service`
-- Check the status of the script (optional): `sudo systemctl status node_server.service` -->
+- Check the status of the script (optional): `sudo systemctl status node_server.service`
 
 **Auto-Stop on Shutdown:**
 - `sudo nano /etc/systemd/system/shutdown_script.service`
@@ -126,7 +127,7 @@ ExecStart=/usr/bin/python3 /home/pi/physql/shutdown_script.py
 RemainAfterExit=true
 
 [Install]
-WantedBy=halt.target poweroff.target reboot.target
+WantedBy=halt.target poweroff.target reboot.target shutdown.target
 ```
 - `sudo systemctl daemon-reload`
 - `sudo systemctl enable shutdown_script.service`

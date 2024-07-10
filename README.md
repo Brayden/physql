@@ -34,6 +34,30 @@ Troubleshoot:
 - Clone Github repository: `git@github.com:Brayden/physql.git` in `/home/pi`
 - Add `.env` file with `API_KEY=xxxxxxxx` at root of `physql` folder
 
+**Loading Screen Script:**
+- `sudo nano /etc/systemd/system/epd_display.service`
+- Add the following contents to the file
+```
+[Unit]
+Description=Display text on e-paper during startup
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /home/pi/physql/startup_script.py
+WorkingDirectory=/home/pi/physql
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target
+```
+- `sudo systemctl daemon-reload`
+- `sudo systemctl enable epd_display.service`
+- `sudo systemctl start epd_display.service`
+- Check the status of the script (optional): `sudo systemctl status epd_display.service`
+
 **Startup Script:**
 - `sudo nano /etc/systemd/system/voice_trigger_and_node.service`
 - Add the following contents to the file

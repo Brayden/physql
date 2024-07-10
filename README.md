@@ -45,9 +45,7 @@ After=network.target
 [Service]
 ExecStart=/usr/bin/python3 /home/pi/physql/startup_script.py
 WorkingDirectory=/home/pi/physql
-StandardOutput=inherit
-StandardError=inherit
-Restart=always
+RemainAfterExit=true
 User=pi
 
 [Install]

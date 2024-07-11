@@ -10,6 +10,8 @@ var screenshotTimer;
 async function generateScreenshot(instruction = null) {
     const apiKey = process.env.API_KEY;
 
+    console.log('API Key: ', apiKey, instruction);
+
     if (index === 2) {
         index = 0;
     } else {

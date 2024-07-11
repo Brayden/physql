@@ -69,6 +69,8 @@
             const instruction = urlParams.get("instruction");
             const apiKey = urlParams.get("apiKey");
 
+            console.log('urlParams: ', urlParams)
+
             try {
                 const response = await fetch(`https://app.outerbase.com/api/v1/ezql`, {
                     method: 'POST',
@@ -94,6 +96,8 @@
                     type: 'bar',
                     marker: { color: 'black' },
                 }];
+
+                console.log('Data: ', data)
 
                 const layout = {
                     // title: 'Observable Plotly Bar Chart',

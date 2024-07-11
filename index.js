@@ -18,49 +18,26 @@ async function generateScreenshot(instruction = null) {
         index++;
     }
 
-    (async () => {
-        const browser = await puppeteer.launch({
-            executablePath: '/usr/bin/chromium-browser',
-        });
-        const page = await browser.newPage();
-    
-        // Listen for console events and log the messages
-        page.on('console', msg => {
-            for (let i = 0; i < msg.args().length; ++i) {
-                console.log(`${i}: ${msg.args()[i]}`);
-            }
-        });
-    
-        const instruction = "your_instruction"; // Replace with your actual instruction
-        const apiKey = "your_api_key"; // Replace with your actual API key
-        const url = instruction ? `file://${__dirname}/src/index.html?instruction=${instruction}&apiKey=${apiKey}` : `file://${__dirname}/src/index.html?index=${index}&apiKey=${apiKey}`;
-        
-        await page.goto(url);
-        await page.setViewport({ width: 800, height: 480 });
-    
-        // Wait for the page to finish loading and logs to be captured
-        await page.waitForTimeout(3000); // Adjust the timeout as needed
-    
-        // Take a screenshot if needed
-        await page.screenshot({ path: 'page.png', fullPage: true });
-    
-        await browser.close();
-    })();
+    const browser = await puppeteer.launch({
+        executablePath: '/usr/bin/chromium-browser',
+    });
+    const page = await browser.newPage();
+    const url = instruction ? `file://${__dirname}/src/index.html?instruction=${instruction}&apiKey=${apiKey}` : `file://${__dirname}/src/index.html?index=${index}&apiKey=${apiKey}`;
+    await page.goto(url);
+    await page.setViewport({ width: 800, height: 480 });
 
-    // const browser = await puppeteer.launch({
-    //     executablePath: '/usr/bin/chromium-browser',
-    // });
-    // const page = await browser.newPage();
-    // const url = instruction ? `file://${__dirname}/src/index.html?instruction=${instruction}&apiKey=${apiKey}` : `file://${__dirname}/src/index.html?index=${index}&apiKey=${apiKey}`;
-    // await page.goto(url);
-    // await page.setViewport({ width: 800, height: 480 });
+    page.on('console', msg => {
+        for (let i = 0; i < msg.args().length; ++i) {
+            console.log(`${i}: ${msg.args()[i]}`);
+        }
+    });
 
-    // // Javascript await for 3 seconds
-    // await new Promise(resolve => setTimeout(resolve, 3000));
+    // Javascript await for 3 seconds
+    await new Promise(resolve => setTimeout(resolve, 3000));
 
-    // const screenshotPath = 'page.png';
-    // await page.screenshot({ path: screenshotPath, fullPage: true });
-    // await browser.close();
+    const screenshotPath = 'page.png';
+    await page.screenshot({ path: screenshotPath, fullPage: true });
+    await browser.close();
 
     console.log(`Screenshot saved as ${screenshotPath}`);
 

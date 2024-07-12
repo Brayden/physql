@@ -1,4 +1,24 @@
 import bluetooth
+import json
+import os
+
+def configure_wifi(ssid, password):
+    wpa_supplicant_conf = "/etc/wpa_supplicant/wpa_supplicant.conf"
+
+    # Append the new network configuration
+    new_conf = f"""
+    network={{
+        ssid="{ssid}"
+        psk="{password}"
+        key_mgmt=WPA-PSK
+    }}
+    """
+
+    with open(wpa_supplicant_conf, "a") as conf_file:
+        conf_file.write(new_conf)
+
+    # Restart the networking service
+    os.system("sudo wpa_cli -i wlan0 reconfigure")
 
 def bluetooth_server():
     server_sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
@@ -26,8 +46,10 @@ def bluetooth_server():
             if not data:
                 break
             print("Received:", data)
-            # Handle received data (e.g., parse and configure Wi-Fi)
-            # Example: {"ssid": "YourNetwork", "password": "YourPassword"}
+            credentials = json.loads(data.decode('utf-8'))
+            ssid = credentials['ssid']
+            password = credentials['password']
+            configure_wifi(ssid, password)
     except OSError:
         pass
 

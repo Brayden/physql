@@ -135,3 +135,15 @@ WantedBy=halt.target poweroff.target reboot.target shutdown.target
 - `sudo systemctl daemon-reload`
 - `sudo systemctl enable shutdown_script.service`
 - Check the status of the script (optional): `sudo systemctl status shutdown_script.service`
+
+
+**Bluetooth Server:**
+- `sudo apt-get update`
+- `sudo apt-get install bluetooth bluez libbluetooth-dev`
+- `sudo systemctl enable bluetooth`
+- `sudo systemctl start bluetooth`
+- Check the bluetooth status (optional): `sudo systemctl status bluetooth`
+- `pip install pybluez`
+- Run Bluetooth server on Raspberry Pi: `python bluetooth_server.py`
+- TODO: Need to make above script a `systemd` operation to execute on launch
+- ^ Currently placed in `run_voice_trigger.sh`

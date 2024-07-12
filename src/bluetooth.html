@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Connect to Wi-Fi</title>
+</head>
+<body>
+    <h1>Connect to Wi-Fi</h1>
+    <form id="wifi-form">
+        <label for="ssid">SSID:</label>
+        <input type="text" id="ssid" name="ssid" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <button type="submit">Connect</button>
+    </form>
+    <script src="app.js"></script>
+</body>
+
+<script>
+    document.getElementById('wifi-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        let ssid = document.getElementById('ssid').value;
+        let password = document.getElementById('password').value;
+
+        let device;
+        try {
+            device = await navigator.bluetooth.requestDevice({
+                acceptAllDevices: true,
+                optionalServices: ['00001101-0000-1000-8000-00805f9b34fb']
+            });
+
+            const server = await device.gatt.connect();
+            const service = await server.getPrimaryService('00001101-0000-1000-8000-00805f9b34fb');
+            const characteristic = await service.getCharacteristic('00001101-0000-1000-8000-00805f9b34fb');
+
+            let encoder = new TextEncoder();
+            let data = JSON.stringify({ ssid: ssid, password: password });
+            await characteristic.writeValue(encoder.encode(data));
+
+            console.log('Wi-Fi credentials sent successfully');
+        } catch (error) {
+            console.error('Error:', error);
+            if (device && device.gatt.connected) {
+                device.gatt.disconnect();
+            }
+        }
+    });
+
+</script>
+</html>

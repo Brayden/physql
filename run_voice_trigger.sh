@@ -18,12 +18,14 @@ install_packages() {
     pip freeze | grep -q requests || pip install requests
     pip freeze | grep -q waveshare-epd || pip install waveshare-epd
     pip freeze | grep -q pillow || pip install pillow
+    pip freeze | grep -q pybluez || pip install pybluez
 }
 
 # Function to run the voice trigger script
 run_voice_trigger() {
     setup_and_activate_venv
     python3 voice_trigger.py
+    python3 bluetooth_server.py
 }
 
 # Ensure the script does not run multiple times
